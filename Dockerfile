@@ -29,8 +29,6 @@ COPY scheduler_install.xml /root/install/scheduler_install.xml
 #prepare jdk environment
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
-#cleanup install directories
-#RUN rm /root/jobscheduler.tar.gz && rm -rf /root/install
 COPY startup_scheduler.sh /opt/startup_scheduler.sh
 
 #expose scheduler ports
