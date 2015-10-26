@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AutomatedInstallation langpack="eng">
+    <com.izforge.izpack.panels.UserInputPanel id="home">
+        <userInput/>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="licences">
+        <userInput>
+            <entry key="licenceOptions" value="GPL"/>
+            <entry key="licence" value=""/>
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.HTMLLicencePanel id="gpl_licence"/>
+    <com.izforge.izpack.panels.HTMLLicencePanel id="commercial_licence"/>
+    <com.izforge.izpack.panels.TargetPanel id="target">
+        <installpath>/opt/jobscheduler</installpath>
+    </com.izforge.izpack.panels.TargetPanel>
+    <com.izforge.izpack.panels.UserPathPanel id="userpath">
+        <UserPathPanelElement>/opt/jobscheduler/data</UserPathPanelElement>
+    </com.izforge.izpack.panels.UserPathPanel>
+    <com.izforge.izpack.panels.PacksPanel id="package">
+        <pack index="0" name="Job Scheduler" selected="true"/>
+        <pack index="2" name="Database Support" selected="true"/>
+        <pack index="5" name="Housekeeping Jobs" selected="true"/>
+    </com.izforge.izpack.panels.PacksPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="network">
+        <userInput>
+            <entry key="schedulerHost" value=""/>
+            <entry key="schedulerPort" value="4444"/>
+            <entry key="jettyHTTPPort" value="40444"/>
+            <entry key="jettyHTTPSPort" value="48444"/>
+            <entry key="schedulerId" value="scheduler"/>
+            <entry key="schedulerAllowedHost" value="0.0.0.0"/>
+            <entry key="launchScheduler" value="yes"/>
+
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="cluster">
+        <userInput>
+            <entry key="clusterOptions" value=""/>
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="smtp">
+        <userInput>
+            <entry key="mailServer" value=""/>
+            <entry key="mailPort" value="25"/>
+            <entry key="smtpAccount" value=""/>
+            <entry key="smtpPass" value=""/>
+            <entry key="mailFrom" value=""/>
+            <entry key="mailTo" value=""/>
+            <entry key="mailCc" value=""/>
+            <entry key="mailBcc" value=""/>
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="email">
+        <userInput>
+            <entry key="mailOnError" value="no"/>
+            <entry key="mailOnWarning" value="no"/>
+            <entry key="mailOnSuccess" value="no"/>
+            <entry key="jobEvents" value="off"/>
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="database">
+        <userInput>
+            <entry key="databaseDbms" value="mysql"/>
+            <entry key="databaseCreate" value="on"/>
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="dbconnection">
+        <userInput>
+            <entry key="databaseHost" value="{{DB_SERVER_HOST}}"/>
+            <entry key="databasePassword" value="{{DB_SERVER_PASSWORD}}"/>
+            <entry key="databaseUser" value="{{DB_SERVER_USER}}"/>
+            <entry key="databaseSchema" value="{{DB_SERVER_DATABASE}}"/>
+            <entry key="databasePort" value="{{DB_SERVER_PORT}}"/>
+            <entry key="connectorJTDS" value="yes"/>
+            <entry key="connectorMaria" value="yes"/>
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="jdbc">
+        <userInput>
+            <entry key="connector" value=""/>
+            <entry key="connectorLicense" value=""/>
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="end">
+        <userInput/>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.InstallPanel id="install"/>
+    <com.izforge.izpack.panels.ProcessPanel id="process"/>
+    <com.izforge.izpack.panels.FinishPanel id="finish"/>
+</AutomatedInstallation>
