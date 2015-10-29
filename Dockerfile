@@ -5,14 +5,14 @@ MAINTAINER Florian Loedermann <floedermann@gmail.com>
 ENV SOS_JS_URL https://download.sos-berlin.com/JobScheduler.1.10/jobscheduler_linux-x64.1.10.1.tar.gz
 
 #prepare apt environment
-RUN apt-get update && apt-get upgrade && apt-get install -y \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     wget \
     software-properties-common
 
 #install jdk8
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
     add-apt-repository -y ppa:webupd8team/java && \
-    apt-get update && \
+    apt-get update -y && \
     apt-get install -y \
      oracle-java8-installer \
      libmysql-java

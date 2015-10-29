@@ -3,8 +3,8 @@ jobscheduler:
   image: floedermann/jobscheduler
   links:
     - db:mysql
-  volumes_from:
-    - datastore
+#  volumes_from:
+#    - datastore
   ports:
     - "4444:4444"
     - "40444:40444"
@@ -16,7 +16,7 @@ db:
     MYSQL_ROOT_PASSWORD: scheduler
     MYSQL_DATABASE: jobscheduler
 
-datastore:
-   image: busybox
-   volumes:
-     - /opt/jobscheduler/data/scheduler/config/live
+#datastore:
+#   image: busybox
+#   volumes:
+#     - /opt/jobscheduler/data/scheduler/config/live
