@@ -2,7 +2,7 @@ FROM ubuntu:latest
 MAINTAINER Florian Loedermann <floedermann@gmail.com>
 
 #SOS Jobscheduler download URL
-ENV SOS_JS_URL https://download.sos-berlin.com/JobScheduler.1.10/jobscheduler_linux-x64.1.10.1.tar.gz
+ENV SOS_JS_URL https://download.sos-berlin.com/JobScheduler.1.10/jobscheduler_linux-x64.1.10.2.tar.gz
 
 #prepare apt environment
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
