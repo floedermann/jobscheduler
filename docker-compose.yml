@@ -1,6 +1,6 @@
 jobscheduler:
-  build: .
-#  image: floedermann/jobscheduler
+#  build: .
+  image: floedermann/jobscheduler:latest
   links:
     - db:mysql
   volumes_from:
