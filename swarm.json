@@ -1,23 +1,28 @@
 {
   "name": "jobscheduler",
   "components": {
-    "jobscheduler": {
+    "appserver": {
       "image": "registry.giantswarm.io/$GIANTSWARM_LOGIN_NAME/jobscheduler:latest",
       "ports": [4444,40444],
+      "domains": {
+        "4444": "jobscheduler-$GIANTSWARM_LOGIN_NAME.gigantic.io"
+      },
       "links": [
         {
-          "component": "db",
-          "target_port": 3306
+          "component": "mysql",
+          "target_port": 3306,
         }
-      ],
-      "domains": {
-        "4444": "jobscheduler-$GIANTSWARM_LOGIN_NAME.gigantic.io",
-        "40444": "jobscheduler-$GIANTSWARM_LOGIN_NAME.gigantic.io"
-      }
+      ]
     },
-    "db": {
-      "image": "mariadb:latest",
-      "ports": [3306]
+    "mysql": {
+      "image": "mysql",
+      "env": {
+        "MYSQL_USER": "jobscheduler",
+        "MYSQL_PASSWORD": "jobscheduler",
+        "MYSQL_ROOT_PASSWORD": "scheduler",
+        "MYSQL_DATABASE": "jobscheduler"
+       },
+      "ports": 3306
     }
   }
 }
