@@ -15,7 +15,7 @@
       ]
     },
     "mysql": {
-      "image": "mysql",
+      "image": "mariadb",
       "env": {
         "MYSQL_USER": "jobscheduler",
         "MYSQL_PASSWORD": "jobscheduler",
