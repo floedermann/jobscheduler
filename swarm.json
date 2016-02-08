@@ -10,7 +10,7 @@
       "links": [
         {
           "component": "mysql",
-          "target_port": 3306,
+          "target_port": 3306
         }
       ]
     },
