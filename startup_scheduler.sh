@@ -3,9 +3,9 @@
 # set -x
 
 set -e
-echo WAITING 10s...
+echo WAITING 15...
 
-sleep 10s
+sleep 15s
 
 echo CONTAINER_NAME: ${CONTAINER_NAME:=${0##*/}}
 echo DB_SERVER_DBMS: ${DB_SERVER_DBMS:=mysql}
