@@ -29,7 +29,7 @@
       ]
     },
     "mysql": {
-      "image": "mariadb:latest",
+      "image": "percona:latest",
       "env": [
         "MYSQL_USER=jobscheduler",
         "MYSQL_PASSWORD=jobscheduler",
