@@ -2,11 +2,10 @@
   "name": "jobscheduler",
   "components": {
     "appserver": {
-      "image": "registry.giantswarm.io/$GIANTSWARM_LOGIN_NAME/jobscheduler:latest",
+      "image": "floedermann/jobscheduler:latest",
       "ports": [4444, 40444],
       "domains": {
-        "4444": "jobscheduler-$GIANTSWARM_LOGIN_NAME.gigantic.io",
-        "40444": "agent.jobscheduler-$GIANTSWARM_LOGIN_NAME.gigantic.io"
+        "4444": "jobscheduler-$GIANTSWARM_LOGIN_NAME.gigantic.io"
       },
       "volumes": [
         {
@@ -17,19 +16,20 @@
       "links": [
         {
           "component": "mysql",
+          "alias": "MYSQL",
           "target_port": 3306
         }
       ]
     },
     "mysql": {
       "image": "mariadb:latest",
-      "env": {
-        "MYSQL_USER": "jobscheduler",
-        "MYSQL_PASSWORD": "jobscheduler",
-        "MYSQL_ROOT_PASSWORD": "scheduler",
-        "MYSQL_DATABASE": "jobscheduler"
-       },
-      "ports": ["3306/tcp"]
+      "env": [
+        "MYSQL_USER=jobscheduler",
+        "MYSQL_PASSWORD=jobscheduler",
+        "MYSQL_ROOT_PASSWORD=scheduler",
+        "MYSQL_DATABASE=jobscheduler"
+      ],
+      "ports": ["3306"]
     }
   }
 }
