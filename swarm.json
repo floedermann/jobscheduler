@@ -4,6 +4,13 @@
     "appserver": {
       "image": "floedermann/jobscheduler:latest",
       "ports": [4444, 40444],
+      "env": [
+        "MYSQL_ENV_MYSQL_USER=jobscheduler",
+        "MYSQL_ENV_MYSQL_PASSWORD=jobscheduler",
+        "MYSQL_PORT_3306_TCP_ADDR=mysql",
+        "MYSQL_PORT_3306_TCP_PORT=3306",
+        "MYSQL_ENV_MYSQL_DATABASE=jobscheduler"
+      ],
       "domains": {
         "4444": "jobscheduler-$GIANTSWARM_LOGIN_NAME.gigantic.io"
       },
