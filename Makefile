@@ -16,7 +16,7 @@ docker-run-mysql:
     -e "MYSQL_PASSWORD=jobscheduler" \
     -e "MYSQL_ROOT_PASSWORD=scheduler" \
     -e "MYSQL_DATABASE=jobscheduler" \
-	--name jobscheduler-mysql percona:latest
+	--name jobscheduler-mysql mariadb:latest
 
 # Running your custom-built docker image locally
 docker-run:
