@@ -1,85 +1,306 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+XML configuration file for JobScheduler setup
+
+The JobScheduler is available with a dual licensing model.
+- GNU GPL 2.0 License (see http://www.gnu.org/licenses/gpl-2.0.html)
+- JobScheduler Commercial License (see licence.txt)
+
+The setup asks you for the desired license model
+(see <entry key="licenceOptions" .../> below).
+
+If you call the setup with this XML file then you accept
+at the same time the terms of the chosen license agreement.
+-->
 <AutomatedInstallation langpack="eng">
     <com.izforge.izpack.panels.UserInputPanel id="home">
         <userInput/>
     </com.izforge.izpack.panels.UserInputPanel>
     <com.izforge.izpack.panels.UserInputPanel id="licences">
         <userInput>
+
+            <!-- Select the license model (GPL or Commercial) -->
             <entry key="licenceOptions" value="GPL"/>
+
+            <!-- If you selected GPL as license model than the licence must be empty.
+                 Otherwise please enter a license key if available.
+                 It is also possible to modify the license key later. -->
             <entry key="licence" value=""/>
+
         </userInput>
     </com.izforge.izpack.panels.UserInputPanel>
     <com.izforge.izpack.panels.HTMLLicencePanel id="gpl_licence"/>
     <com.izforge.izpack.panels.HTMLLicencePanel id="commercial_licence"/>
     <com.izforge.izpack.panels.TargetPanel id="target">
+
+        <!-- SELECT THE INSTALLATION PATH FOR THE BINARIES AND LIBRARIES
+             The installation expands this path with the Scheduler ID as subdirectory.
+             The path must be absolute!
+             Default paths are
+             /opt/sos-berlin.com/jobscheduler for Unix
+             C:\Program Files\sos-berlin.com\jobscheduler for Windows -->
         <installpath>/opt/jobscheduler</installpath>
+
     </com.izforge.izpack.panels.TargetPanel>
     <com.izforge.izpack.panels.UserPathPanel id="userpath">
+
+        <!-- SELECT THE DATA PATH FOR CONFIGURATION AND LOG FILES
+             The installation expands this path with the Scheduler ID as subdirectory.
+             The path must be absolute!
+             Default paths are
+             /home/[user]/sos-berlin.com/jobscheduler for Unix
+             C:\ProgramData\sos-berlin.com\jobscheduler for Windows -->
         <UserPathPanelElement>/opt/jobscheduler/data</UserPathPanelElement>
+
     </com.izforge.izpack.panels.UserPathPanel>
     <com.izforge.izpack.panels.PacksPanel id="package">
+
+        <!-- SELECT THE PACKS WHICH YOU WANT INSTALL -->
+
+        <!-- Package: JobScheduler
+             JobScheduler Basic Installation
+             THIS PACK IS REQUIRED. IT MUST BE TRUE -->
         <pack index="0" name="Job Scheduler" selected="true"/>
+
+        <!-- Package: Database Support
+             Job history and log files can be stored in a database. Database support is
+             available for MySQL, PostgreSQL, Oracle, SQL Server, DB2.
+             THIS PACK IS REQUIRED. IT MUST BE TRUE -->
         <pack index="2" name="Database Support" selected="true"/>
+
+        <!-- Package: Housekeeping Jobs
+             Housekeeping Jobs are automatically launched by the Job Scheduler, e.g. to send
+             buffered logs by mail, to remove temporary files or to restart the JobScheduler. -->
         <pack index="5" name="Housekeeping Jobs" selected="true"/>
+
     </com.izforge.izpack.panels.PacksPanel>
     <com.izforge.izpack.panels.UserInputPanel id="network">
         <userInput>
-            <entry key="schedulerHost" value=""/>
+            <!-- Network Configuration -->
+
+            <!-- Enter the port for TCP communication -->
             <entry key="schedulerPort" value="4444"/>
-            <entry key="jettyHTTPPort" value="40444"/>
-            <entry key="jettyHTTPSPort" value="48444"/>
+
+            <!-- Enter the port for HTTP communication -->
+            <entry key="schedulerHTTPPort" value="40444"/>
+
+            <!-- To enter a JobScheduler ID is required.
+                 The IDs of multiple instances of the JobScheduler must be unique per server.
+                 The JobScheduler ID expands the above installation paths as subdirectory.
+                 Please omit special characters like: / \ : ; * ? ! $ % & " < > ( ) | ^ -->
             <entry key="schedulerId" value="scheduler"/>
+
+            <!-- Specify optional Java options here -->
+            <entry key="jsJavaOptions" value=""/>
+
+            <!-- It is recommended to enable TCP access for the host where the JobScheduler will install,
+                 optionally enter additional host names or ip addresses. To enable all hosts in your
+                 network to access the JobScheduler enter '0.0.0.0'. -->
             <entry key="schedulerAllowedHost" value="0.0.0.0"/>
+
+            <!-- Choose (yes or no) wether the JobScheduler should be started at the end of the installation -->
             <entry key="launchScheduler" value="yes"/>
 
         </userInput>
     </com.izforge.izpack.panels.UserInputPanel>
     <com.izforge.izpack.panels.UserInputPanel id="cluster">
         <userInput>
+            <!-- Cluster Configuration -->
+
+            <!-- The JobScheduler can be installed independent of other possibly JobSchedulers,
+                 as a primary JobScheduler in a backup system or as a backup JobScheduler.
+                 Use '' for a standalone, '-exclusive' for a primary
+                 or '-exclusive -backup' for a backup JobScheduler.
+                 A database is required for a backup system. All JobSchedulers in a backup system
+                 must have the same JobScheduler ID and the same database.
+                 Further you can set '-distributed-orders' for a load balancing cluster.
+                 For more information see
+                 hhttp://www.sos-berlin.com/doc/de/scheduler.doc/backupscheduler.xml
+                 http://www.sos-berlin.com/doc/de/scheduler.doc/distributed_orders.xml -->
             <entry key="clusterOptions" value=""/>
+
         </userInput>
     </com.izforge.izpack.panels.UserInputPanel>
     <com.izforge.izpack.panels.UserInputPanel id="smtp">
         <userInput>
+            <!-- Mail Recipients Configuration / SMTP Authentication -->
+
+            <!-- Enter the ip address or host name and port (default: 25) of your SMTP server -->
             <entry key="mailServer" value=""/>
             <entry key="mailPort" value="25"/>
+
+            <!-- Configure the SMTP authentication if necessary. -->
             <entry key="smtpAccount" value=""/>
             <entry key="smtpPass" value=""/>
+
+            <!-- Enter the addresses of recipients to which mails with log files are automatically
+                 forwarded. Separate multiple recipients by commas -->
+
+            <!-- Account from which mails are sent -->
             <entry key="mailFrom" value=""/>
+
+            <!-- Recipients of mails -->
             <entry key="mailTo" value=""/>
+
+            <!-- Recipients of carbon copies: -->
             <entry key="mailCc" value=""/>
+
+            <!-- Recipients of blind carbon copies -->
             <entry key="mailBcc" value=""/>
+
         </userInput>
     </com.izforge.izpack.panels.UserInputPanel>
     <com.izforge.izpack.panels.UserInputPanel id="email">
         <userInput>
+            <!-- Mail Configuration / Event Handler -->
+
+            <!-- Choose in which cases mails with log files are automatically forwarded. -->
             <entry key="mailOnError" value="no"/>
             <entry key="mailOnWarning" value="no"/>
             <entry key="mailOnSuccess" value="no"/>
+
+            <!-- The Housekeeping package is required for configure JobScheduler as event handler
+                 Choose this option if you intend to use JobScheduler Events and
+                 - this JobScheduler instance is the only instance which processes Events
+                 - this JobScheduler instance is a supervisor for other JobSchedulers which submit Events -->
             <entry key="jobEvents" value="off"/>
+
         </userInput>
     </com.izforge.izpack.panels.UserInputPanel>
     <com.izforge.izpack.panels.UserInputPanel id="database">
         <userInput>
+            <!-- JobScheduler Database Configuration -->
+
+            <!-- Database connection settings can be specified with following entries such as
+                 databaseHost, databasePort, ... or by a hibernate configuration file
+                 Posible values are 'withoutHibernateFile' (default) and 'withHibernateFile'. -->
+            <entry key="databaseConfigurationMethod" value="withoutHibernateFile"/>
+
+            <!-- Choose the database management system. Supported values are 'mysql' for MySQL,
+                 'oracle' for Oracle, 'mssql' for MS SQL Server, 'pgsql' for PostgreSQL,
+                 'db2' for DB2 and 'sybase' for Sybase.
+                 Only if databaseConfigurationMethod=withoutHibernateFile -->
             <entry key="databaseDbms" value="mysql"/>
+
+            <!-- Path to a hibernate configuration file if databaseConfigurationMethod=withHibernateFile -->
+            <entry key="hibernateConfFile" value=""/>
+
+            <!-- You can choose between 'on' or 'off' to create the database tables.
+                 If you have modified the initial data of an already existing installation,
+                 then the modifications will be undone. Data added remains unchanged.
+                 This entry should be only 'off', when you sure, that all tables are already created. -->
             <entry key="databaseCreate" value="on"/>
+
         </userInput>
     </com.izforge.izpack.panels.UserInputPanel>
     <com.izforge.izpack.panels.UserInputPanel id="dbconnection">
         <userInput>
+            <!-- JobScheduler Database Configuration if databaseConfigurationMethod=withoutHibernateFile -->
+
+            <!-- Enter the name or ip address of the database host -->
             <entry key="databaseHost" value="{{DB_SERVER_HOST}}"/>
-            <entry key="databasePassword" value="{{DB_SERVER_PASSWORD}}"/>
-            <entry key="databaseUser" value="{{DB_SERVER_USER}}"/>
-            <entry key="databaseSchema" value="{{DB_SERVER_DATABASE}}"/>
+
+            <!-- Enter the port number for the database instance. Default ports are for MySQL 3306,
+                 Oracle 1521, MS SQL Server 1433, postgreSQL 5432, DB2 50000, Sybase 5000. -->
             <entry key="databasePort" value="{{DB_SERVER_PORT}}"/>
-            <entry key="connectorJTDS" value="yes"/>
-            <entry key="connectorMaria" value="yes"/>
+
+            <!-- Enter the schema -->
+            <entry key="databaseSchema" value="{{DB_SERVER_DATABASE}}"/>
+
+            <!-- Enter the user name for database access -->
+            <entry key="databaseUser" value="{{DB_SERVER_USER}}"/>
+
+            <!-- Enter the password for database access -->
+            <entry key="databasePassword" value="{{DB_SERVER_PASSWORD}}"/>
+
         </userInput>
     </com.izforge.izpack.panels.UserInputPanel>
     <com.izforge.izpack.panels.UserInputPanel id="jdbc">
         <userInput>
+            <!-- JobScheduler Database Configuration -->
+
+            <!-- You can specify an external JDBC connector then set internalConnector = no
+                 For license reasons MySQL, Sybase and MS SQL Server JDBC Drivers are
+                 not provided. Alternatively you can use the mariadb JDBC Driver for MySQL and
+                 the jTDS JDBC Driver for MS SQL Server and Sybase which is provided.
+                 An internal JDBC connector for DB2 is not available -->
+
+            <!-- You can choose between 'yes' or 'no' for using the internal JDBC connector
+                 or not -->
+            <entry key="internalConnector" value="yes"/>
+
+            <!-- Select the path to JDBC Driver -->
             <entry key="connector" value=""/>
+
+            <!-- Only for DB2: Select the path to DB2 license file for JDBC Driver -->
             <entry key="connectorLicense" value=""/>
+
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="reportingDatabase">
+        <userInput>
+            <!-- Reporting Database Configuration
+                 NOT SUPPORTED FOR SYBASE AND DB2 -->
+
+            <!-- Set 'yes' if the JobScheduler and the Reporting database are the same.
+                 If 'yes' then further Reporting database variables are ignored. -->
+            <entry key="sameDbConnection" value="yes"/>
+
+            <!-- Database connection settings can be specified with following entries such as
+                 databaseHost, databasePort, ... or by a hibernate configuration file
+                 Posible values are 'withoutHibernateFile' (default) and 'withHibernateFile'. -->
+            <entry key="reporting.databaseConfigurationMethod" value="withoutHibernateFile"/>
+
+            <!-- Choose the database management system. Supported values are 'mysql' for MySQL,
+                 'oracle' for Oracle, 'mssql' for MS SQL Server, 'pgsql' for PostgreSQL.
+                 only if reporting.databaseConfigurationMethod=withoutHibernateFile-->
+            <entry key="reporting.databaseDbms" value=""/>
+
+            <!-- Path to a hibernate configuration file if reporting.databaseConfigurationMethod=withHibernateFile -->
+            <entry key="reporting.hibernateConfFile" value=""/>
+
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="reportingDbconnection">
+        <userInput>
+            <!-- Reporting Database Configuration if reporting.databaseConfigurationMethod=withoutHibernateFile
+                 NOT SUPPORTED FOR SYBASE AND DB2 -->
+
+            <!-- Enter the name or ip address of the database host -->
+            <entry key="reporting.databaseHost" value=""/>
+
+            <!-- Enter the port number for the database instance. Default ports are for MySQL 3306,
+                 Oracle 1521, MS SQL Server 1433, postgreSQL 5432. -->
+            <entry key="reporting.databasePort" value=""/>
+
+            <!-- Enter the schema -->
+            <entry key="reporting.databaseSchema" value=""/>
+
+            <!-- Enter the user name for database access -->
+            <entry key="reporting.databaseUser" value=""/>
+
+            <!-- Enter the password for database access -->
+            <entry key="reporting.databasePassword" value=""/>
+
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="reportingJdbc">
+        <userInput>
+            <!-- Reporting Database Configuration
+                 NOT SUPPORTED FOR SYBASE AND DB2 -->
+
+            <!-- You can specify an external JDBC connector then set reporting.internalConnector = no
+                 For license reasons MySQL and MS SQL Server JDBC Drivers are
+                 not provided. Alternatively you can use the mariadb JDBC Driver for MySQL and
+                 the jTDS JDBC Driver for MS SQL Server which is provided. -->
+
+            <!-- You can choose between 'yes' or 'no' for using the internal JDBC connector
+                 or not -->
+            <entry key="reporting.internalConnector" value="yes"/>
+
+            <!-- Select the path to JDBC Driver -->
+            <entry key="reporting.connector" value=""/>
+
         </userInput>
     </com.izforge.izpack.panels.UserInputPanel>
     <com.izforge.izpack.panels.UserInputPanel id="end">
