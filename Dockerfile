@@ -1,8 +1,11 @@
-FROM java:8
+FROM java:8-alpine
 MAINTAINER Florian Loedermann <floedermann@gmail.com>
 
 #SOS Jobscheduler download URL
 ENV SOS_JS_URL https://download.sos-berlin.com/JobScheduler.1.11/jobscheduler_linux-x64.1.11.5.tar.gz
+
+#add packages
+RUN apk add --no-cache curl tar bash sed
 
 #download and install scheduler
 RUN curl -o /root/jobscheduler.tar.gz $SOS_JS_URL
