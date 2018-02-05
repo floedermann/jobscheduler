@@ -6,7 +6,7 @@ jobscheduler:
   volumes_from:
     - datastore
   ports:
-    - "4444:4444"
+    - "4446:4446"
     - "40444:40444"
 db:
   image: mariadb:latest
