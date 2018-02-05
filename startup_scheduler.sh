@@ -19,13 +19,14 @@ do
   sleep 1
 done
 
-sed -i -e "s/{{DB_SERVER_DBMS}}/$DB_SERVER_DBMS/g" /root/install/scheduler_install.xml
-sed -i -e "s/{{DB_SERVER_HOST}}/$DB_SERVER_HOST/g" /root/install/scheduler_install.xml
-sed -i -e "s/{{DB_SERVER_PORT}}/$DB_SERVER_PORT/g" /root/install/scheduler_install.xml
-sed -i -e "s/{{DB_SERVER_USER}}/$DB_SERVER_USER/g" /root/install/scheduler_install.xml
-sed -i -e "s/{{DB_SERVER_PASSWORD}}/$DB_SERVER_PASSWORD/g" /root/install/scheduler_install.xml
-sed -i -e "s/{{DB_SERVER_DATABASE}}/$DB_SERVER_DATABASE/g" /root/install/scheduler_install.xml
+sed -i -e "s/{{DB_SERVER_DBMS}}/$DB_SERVER_DBMS/g" /root/install/scheduler_install.xml /root/install/joc/joc_install.xml
+sed -i -e "s/{{DB_SERVER_HOST}}/$DB_SERVER_HOST/g" /root/install/scheduler_install.xml /root/install/joc/joc_install.xml
+sed -i -e "s/{{DB_SERVER_PORT}}/$DB_SERVER_PORT/g" /root/install/scheduler_install.xml /root/install/joc/joc_install.xml
+sed -i -e "s/{{DB_SERVER_USER}}/$DB_SERVER_USER/g" /root/install/scheduler_install.xml /root/install/joc/joc_install.xml
+sed -i -e "s/{{DB_SERVER_PASSWORD}}/$DB_SERVER_PASSWORD/g" /root/install/scheduler_install.xml /root/install/joc/joc_install.xml
+sed -i -e "s/{{DB_SERVER_DATABASE}}/$DB_SERVER_DATABASE/g" /root/install/scheduler_install.xml /root/install/joc/joc_install.xml
 
 (cd /root/install; ./setup.sh -u scheduler_install.xml)
+(cd /root/install/joc; ./setup.sh -u joc_install.xml)
 
 sleep infinity
