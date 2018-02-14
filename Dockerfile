@@ -5,14 +5,10 @@ MAINTAINER Florian Loedermann <floedermann@gmail.com>
 ENV SOS_JS_URL https://download.sos-berlin.com/JobScheduler.1.12/jobscheduler_linux-x64.1.12.0.tar.gz
 ENV SOS_JOC_URL https://download.sos-berlin.com/JobScheduler.1.12/joc_linux.1.12.0.tar.gz
 
-<<<<<<< HEAD
 #add packages
 RUN apk add --no-cache curl tar bash sed
 
 #download and install scheduler
-=======
-#download scheduler
->>>>>>> origin/master
 RUN curl -o /root/jobscheduler.tar.gz $SOS_JS_URL
 RUN mkdir /root/install && tar xzvf /root/jobscheduler.tar.gz -C /root/install --strip-components=1
 COPY scheduler_install.xml /root/install/scheduler_install.xml
