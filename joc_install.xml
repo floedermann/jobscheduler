@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 
+XML configuration file for JOC
+
+If you call the installer with this XML file then 
+you accept at the same time the terms of the 
+licence agreement under GNU GPL 2.0 License 
+(see http://www.gnu.org/licenses/gpl-2.0.html)
+-->
+<AutomatedInstallation langpack="eng">
+    <com.izforge.izpack.panels.UserInputPanel id="home">
+        <userInput/>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.HTMLLicencePanel id="gpl_licence"/>
+    <com.izforge.izpack.panels.TargetPanel id="target">
+        
+        <!-- SELECT THE INSTALLATION PATH
+             It must be absolute! 
+             For example:
+             /opt/sos-berlin.com/joc on Linux
+             C:\Program Files\sos-berlin.com\joc on Windows -->
+        <installpath>/opt/joc</installpath>
+        
+    </com.izforge.izpack.panels.TargetPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="jetty">
+        <userInput>
+            
+            <!-- JOC requires a servlet container such as Jetty. 
+                 If a servlet container already installed then you can use it. 
+                 Otherwise a Jetty will be installed in addition if withJettyInstall=yes.
+                 You need root permissions to install JOC with Jetty. -->
+            <entry key="withJettyInstall" value="yes"/>
+            <entry key="jettyPort" value="4446"/>
+            <!-- Only necessary for Windows -->
+            <entry key="jettyStopPort" value="40446"/>
+            <!-- Only necessary for Unix (root permissions required) -->
+            <entry key="withJocInstallAsDaemon" value="no"/>
+            <!-- Path to Jetty base directory 
+                 For example:
+                 /homer/[user]/sos-berlin.com/joc on Linux
+                 C:\ProgramData\sos-berlin.com\joc on Windows -->
+            <entry key="jettyBaseDir" value=""/>
+            
+            <!-- Java options for Jetty. -->
+            <!-- Initial memory pool (-Xms) in MB -->
+            <entry key="jettyOptionXms" value="128"/>
+            <!-- Maximum memory pool (-Xmx) in MB -->
+            <entry key="jettyOptionXmx" value="512"/>
+            <!-- Thread stack size (-Xss) in KB -->
+            <entry key="jettyOptionXss" value="4000"/>
+            <!-- Further Java options -->
+            <entry key="jettyOptions" value=""/>
+            
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="reportingDatabase">
+        <userInput>
+            <!-- Reporting Database Configuration -->
+            
+            <!-- Database connection settings can be specified with following entries such as
+                 databaseHost, databasePort, ... or by a hibernate configuration file 
+                 Posible values are 'withoutHibernateFile' (default) and 'withHibernateFile'. -->
+            <entry key="reporting.databaseConfigurationMethod" value="withoutHibernateFile"/>
+                 
+            <!-- Choose the database management system. Supported values are 'mysql' for MySQL,
+                 'oracle' for Oracle, 'mssql' for MS SQL Server, 'pgsql' for PostgreSQL.
+                 Only if reporting.databaseConfigurationMethod=withoutHibernateFile -->
+            <entry key="reporting.databaseDbms" value="{{DB_SERVER_DBMS}}"/>
+            
+            <!-- Path to a hibernate configuration file if reporting.databaseConfigurationMethod=withHibernateFile -->
+            <entry key="reporting.hibernateConfFile" value=""/>
+            
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="reportingDbconnection">
+        <userInput>
+            <!-- Reporting Database Configuration  if reporting.databaseConfigurationMethod=withoutHibernateFile -->
+                 
+            <!-- Enter the name or ip address of the database host -->
+            <entry key="reporting.databaseHost" value="{{DB_SERVER_HOST}}"/>
+            
+            <!-- Enter the port number for the database instance. Default ports are for MySQL 3306, 
+                 Oracle 1521, MS SQL Server 1433, postgreSQL 5432. -->
+            <entry key="reporting.databasePort" value="{{DB_SERVER_PORT}}"/>
+            
+            <!-- Enter the schema -->
+            <entry key="reporting.databaseSchema" value="{{DB_SERVER_DATABASE}}"/>
+            
+            <!-- Enter the user name for database access -->
+            <entry key="reporting.databaseUser" value="{{DB_SERVER_USER}}"/>
+            
+            <!-- Enter the password for database access -->
+            <entry key="reporting.databasePassword" value="{{DB_SERVER_PASSWORD}}"/>
+            
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="reportingJdbc">
+        <userInput>
+            <!-- Reporting Database Configuration -->
+            
+            <!-- You can specify an external JDBC connector then set reporting.internalConnector = no
+                 For license reasons MySQL and MS SQL Server JDBC Drivers are 
+                 not provided. Alternatively you can use the mariadb JDBC Driver for MySQL and 
+                 the jTDS JDBC Driver for MS SQL Server which is provided. -->
+                 
+            <!-- You can choose between 'yes' or 'no' for using the internal JDBC connector
+                 or not -->
+            <entry key="reporting.internalConnector" value="yes"/>
+                 
+            <!-- Select the path to JDBC Driver -->
+            <entry key="reporting.connector" value=""/>
+            
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="database">
+        <userInput>
+            <!-- JobScheduler Database Configuration -->
+            
+            <!-- Set 'yes' if the Reporting and the JobScheduler database are the same.
+                 If 'yes' then further JobScheduler database variables are ignored. -->
+            <entry key="sameDbConnection" value="yes"/>
+            
+            <!-- Database connection settings can be specified with following entries such as
+                 databaseHost, databasePort, ... or by a hibernate configuration file 
+                 Posible values are 'withoutHibernateFile' (default) and 'withHibernateFile'. -->
+            <entry key="databaseConfigurationMethod" value="withoutHibernateFile"/>
+                 
+            <!-- Choose the database management system. Supported values are 'mysql' for MySQL,
+                 'oracle' for Oracle, 'mssql' for MS SQL Server, 'pgsql' for PostgreSQL,
+                 'db2' for DB2 and 'sybase' for Sybase. 
+                 Only if databaseConfigurationMethod=withoutHibernateFile -->
+            <entry key="databaseDbms" value=""/>
+            
+            <!-- Path to a hibernate configuration file if databaseConfigurationMethod=withHibernateFile -->
+            <entry key="hibernateConfFile" value=""/>
+            
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="dbconnection">
+        <userInput>
+            <!-- JobScheduler Database Configuration if databaseConfigurationMethod=withoutHibernateFile -->
+                 
+            <!-- Enter the name or ip address of the database host -->
+            <entry key="databaseHost" value=""/>
+            
+            <!-- Enter the port number for the database instance. Default ports are for MySQL 3306, 
+                 Oracle 1521, MS SQL Server 1433, postgreSQL 5432, DB2 50000, Sybase 5000. -->
+            <entry key="databasePort" value=""/>
+            
+            <!-- Enter the schema -->
+            <entry key="databaseSchema" value=""/>
+            
+            <!-- Enter the user name for database access -->
+            <entry key="databaseUser" value=""/>
+            
+            <!-- Enter the password for database access -->
+            <entry key="databasePassword" value=""/>
+            
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="jdbc">
+        <userInput>
+            <!-- JobScheduler Database Configuration -->
+            
+            <!-- You can specify an external JDBC connector then set internalConnector = no
+                 For license reasons MySQL, Sybase and MS SQL Server JDBC Drivers are 
+                 not provided. Alternatively you can use the mariadb JDBC Driver for MySQL and 
+                 the jTDS JDBC Driver for MS SQL Server and Sybase which is provided. 
+                 An internal JDBC connector for DB2 is not available -->
+                 
+            <!-- You can choose between 'yes' or 'no' for using the internal JDBC connector
+                 or not -->
+            <entry key="internalConnector" value="yes"/>
+            
+            <!-- Select the path to JDBC Driver -->
+            <entry key="connector" value=""/>
+            
+            <!-- Only for DB2: Select the path to DB2 license file for JDBC Driver -->
+            <entry key="connectorLicense" value=""/>
+            
+        </userInput>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.UserInputPanel id="end">
+        <userInput/>
+    </com.izforge.izpack.panels.UserInputPanel>
+    <com.izforge.izpack.panels.InstallPanel id="install"/>
+    <com.izforge.izpack.panels.ProcessPanel id="process"/>
+    <com.izforge.izpack.panels.FinishPanel id="finish"/>
+</AutomatedInstallation>

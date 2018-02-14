@@ -5,7 +5,9 @@ Dockerfile for Jobschedulerserver www.sos-berlin.com
 
 # General
 
-* Ports: 4444 (webinterface), 40444 (agents)
+* Ports:
+  * 4446 (Webinterface, username/password: root/root)
+  * 40444 (Agents)
 * you can either use mysql or mariadb
 * mysql environment will be used in startup script
 
@@ -21,7 +23,7 @@ jobscheduler:
   volumes_from:
     - datastore
   ports:
-    - "4444:4444"
+    - "4446:4446"
     - "40444:40444"
 
 db:
