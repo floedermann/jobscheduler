@@ -29,6 +29,7 @@ sed -i -e "s/{{DB_SERVER_DATABASE}}/$DB_SERVER_DATABASE/g" /root/install/schedul
 (cd /root/install; ./setup.sh -u scheduler_install.xml)
 (cd /root/install/joc; ./setup.sh -u joc_install.xml)
 
-# for alpine: while sleep 10; do :; done
+# alpine only
+while sleep 10; do :; done
 
-sleep infinity
+#sleep infinity

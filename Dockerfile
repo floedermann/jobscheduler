@@ -1,12 +1,11 @@
-FROM java:8
-MAINTAINER Florian Loedermann <floedermann@gmail.com>
+FROM java:8-alpine
 
 #SOS Jobscheduler download URL
 ENV SOS_JS_URL https://download.sos-berlin.com/JobScheduler.1.12/jobscheduler_linux-x64.1.12.0.tar.gz
 ENV SOS_JOC_URL https://download.sos-berlin.com/JobScheduler.1.12/joc_linux.1.12.0.tar.gz
 
 #add packages - needed for alpine
-#RUN apk add --no-cache curl tar bash sed
+RUN apk add --no-cache curl tar bash sed
 
 #download and install scheduler
 RUN curl -o /root/jobscheduler.tar.gz $SOS_JS_URL
@@ -25,5 +24,5 @@ COPY startup_scheduler.sh /opt/startup_scheduler.sh
 EXPOSE 40444 48444 4444 4446 40446
 
 #start wrapper script
-CMD chmod +x /opt/startup_scheduler.sh
+RUN chmod +x /opt/startup_scheduler.sh
 CMD ["bash","/opt/startup_scheduler.sh"]
